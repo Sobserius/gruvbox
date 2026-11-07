@@ -1,0 +1,89 @@
+// Mangobar config — Gruvbox rice (adapted from xylvzm/dotfiles-archlinux for MangoWC)
+// Native MangoWC modules: workspaces (tags) + keyboardlayout
+{
+  "layer": "top",
+  "height": 27,
+  "buffer-scale": 1,
+  "sys-interval": 2,
+
+  "modules-left": [
+    "custom/arch",
+    "workspaces"
+  ],
+  "modules-center": [
+    "custom/music",
+    "custom/cava"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "memory",
+    "keyboardlayout",
+    "clock#time",
+    "custom/power"
+  ],
+
+  "custom/arch": {
+    "format": "",
+    "on-click": "$HOME/.config/rofi/launch-gruvbox.sh",
+    "interval": 0
+  },
+
+  "workspaces": {
+    "hide-empty": false,
+    "pinned": [1, 2, 3, 4, 5],
+    "on-click": "activate",
+    "on-click-right": "toggle"
+  },
+
+  "custom/music": {
+    "exec": "python3 $HOME/.config/waybar/scripts/music-mangobar.py",
+    "interval": 2,
+    "format": "{}",
+    "on-click": "python3 $HOME/.config/eww/scripts/toggle.py music",
+    "on-click-right": "playerctl next"
+  },
+
+  "custom/cava": {
+    "exec": "python3 $HOME/.config/waybar/scripts/spectrum-mangobar.py",
+    "interval": 2,
+    "format": "{}"
+  },
+
+  "pulseaudio": {
+    "format": "󰕾 {volume}%",
+    "format-muted": "󰝟 {volume}%",
+    "scroll-step": 5,
+    "on-click": "python3 $HOME/.config/eww/scripts/volume.py toggle",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+  },
+
+  "network": {
+    "format": "󰖩 {ifname}",
+    "format-wifi": "󰖩 {ssid}",
+    "format-ethernet": "󰈀 wired",
+    "format-disconnected": "󰖪 offline",
+    "format-alt": "↓{down} ↑{up}",
+    "on-click": "python3 $HOME/.config/eww/scripts/connectivity.py toggle wifi",
+    "on-click-right": "python3 $HOME/.config/eww/scripts/connectivity.py toggle bluetooth"
+  },
+
+  "memory": {
+    "format": "󰍛 {percent}%",
+    "interval": 5
+  },
+
+  "keyboardlayout": {
+    "format": "󰌌 {short}"
+  },
+
+  "clock#time": {
+    "format": "󰥔 {:L%I:%M%p}",
+    "on-click": "python3 $HOME/.config/eww/scripts/toggle.py calendar"
+  },
+
+  "custom/power": {
+    "format": "",
+    "on-click": "python3 $HOME/.config/eww/scripts/power-toggle.py"
+  }
+}

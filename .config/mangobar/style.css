@@ -1,0 +1,137 @@
+/* Mangobar Gruvbox theme — adapted from xylvzm/dotfiles-archlinux (MangoWC)
+ * ~1.25x smaller, arch+tags joined as one continuous strip, bar "border" via bg+padding.
+ * Note: mangobar's CSS subset has no drawn border/border-width; #bar border is simulated.
+ *       Individual tag rounding (true single outer pill) is limited (no :first/:last-child).
+ */
+
+@define-color bg #000200;
+@define-color fg #e9d9b6;
+@define-color red #8c3936;
+@define-color khaki #ba9f64;
+@define-color yellow #b1b91b;
+@define-color blue #85a699;
+@define-color pink #a86585;
+@define-color lightgreen #a1ba97;
+@define-color orange #edbb26;
+@define-color green #6b9e67;
+@define-color teal #508780;
+
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 10px;
+    font-weight: bold;
+    color: @fg;
+    background-color: @bg;
+    padding: 0px 6px;
+    margin: 3px 1px;
+    border-radius: 0px;
+}
+
+#bar {
+    /* Simulated border: khaki frame around a dark interior */
+    background-color: @khaki;
+    margin: 5px 8px;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+/* Left: arch + tags joined into one continuous bar/pill-cap on the left */
+#custom-arch {
+    background-color: @teal;
+    color: @fg;
+    font-size: 13px;
+    padding: 0px 9px;
+    margin: 0px 0px 0px 0px;
+    border-radius: 8px 0px 0px 8px;
+    min-width: 18px;
+}
+
+/* All tag states render as individual elements — keep them flush (no gaps/radii)
+   so they form one continuous strip attached to the arch cap. */
+#tags, #workspaces button,
+#tags.active, #tags.occupied, #tags.urgent, #tags.empty, #tags.inactive,
+#workspaces button.active, #workspaces button.visible, #workspaces button.urgent, #workspaces button.hidden {
+    padding: 0px 7px;
+    margin: 0px 0px;
+    border-radius: 0px;
+}
+#tags, #workspaces button { background-color: @bg; color: @fg; }
+#tags.active, #workspaces button.active { background-color: @blue; color: @bg; }
+#tags.occupied, #workspaces button.visible { background-color: @bg; color: @fg; }
+#tags.urgent, #workspaces button.urgent { background-color: @red; color: @bg; }
+#tags.empty, #tags.inactive, #workspaces button.hidden { background-color: @bg; color: @khaki; }
+
+/* Center: music + cava */
+#custom-music {
+    color: @green;
+    background-color: @bg;
+    padding: 0px 5px;
+    margin: 0px 1px;
+}
+#custom-cava {
+    color: @bg;
+    background-color: @green;
+    border-radius: 6px;
+    font-family: "JetBrains Mono";
+    font-size: 10px;
+    padding: 0px 5px;
+    margin: 0px 1px;
+}
+
+/* Right modules (Gruvbox color coding) */
+#volume {
+    background-color: @orange;
+    color: @bg;
+    border-radius: 6px;
+    margin: 0px 1px;
+}
+#network {
+    background-color: @lightgreen;
+    color: @bg;
+    border-radius: 6px;
+    margin: 0px 1px;
+}
+#network.wifi { background-color: @lightgreen; color: @bg; }
+#network.ethernet { background-color: @lightgreen; color: @bg; }
+#network.disconnected { background-color: @red; color: @fg; }
+
+#mem {
+    background-color: @pink;
+    color: @bg;
+    border-radius: 6px;
+    margin: 0px 1px;
+}
+#keyboardlayout {
+    background-color: @blue;
+    color: @bg;
+    border-radius: 6px;
+    margin: 0px 1px;
+}
+#clock {
+    background-color: @yellow;
+    color: @bg;
+    border-radius: 6px;
+    margin: 0px 1px;
+}
+#custom-power {
+    background-color: transparent;
+    color: @fg;
+    padding: 0px 5px;
+    margin: 0px 1px;
+}
+
+#tray {
+    background-color: @bg;
+    padding: 0px 5px;
+    margin: 0px 1px;
+}
+
+menu {
+    background-color: @bg;
+    border-color: @khaki;
+    color: @fg;
+    border-radius: 8px;
+    font-size: 10px;
+}
+menuitem { color: @fg; }
+menuitem:hover { background-color: @khaki; color: @bg; }

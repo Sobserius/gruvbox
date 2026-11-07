@@ -1,0 +1,41 @@
+# Gruvbox-style lock screen (adapted from hyprlock)
+# Uses swaylock-effects. Background image is a placeholder path.
+ignore-empty-password
+show-failed-attempts
+font=JetBrainsMono Nerd Font
+
+color=000200
+image=$HOME/lowpoly.png
+scaling=fill
+
+effect-blur=6x2
+effect-vignette=0.2:0.6
+
+inside-color=000200cc
+inside-clear-color=000200cc
+inside-ver-color=508780cc
+inside-wrong-color=8c3936cc
+
+ring-color=ba9f64
+ring-clear-color=6b9e67
+ring-ver-color=85a699
+ring-wrong-color=8c3936
+
+line-color=00000000
+separator-color=00000000
+
+text-color=e9d9b6
+text-clear-color=e9d9b6
+text-ver-color=e9d9b6
+text-wrong-color=e9d9b6
+
+key-hl-color=edbb26
+bs-hl-color=8c3936
+caps-lock-key-hl-color=edbb26
+caps-lock-bs-hl-color=8c3936
+
+indicator-radius=110
+indicator-thickness=8
+clock
+timestr=%H:%M
+datestr=%A, %d %B
