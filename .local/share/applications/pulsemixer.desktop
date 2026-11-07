@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=PulseMixer
+GenericName=Audio Mixer
+Comment=Terminal mixer for PipeWire / PulseAudio (Gruvbox, no pink)
+Exec=/usr/local/bin/pulsemixer
+Icon=multimedia-volume-control
+Terminal=false
+Categories=AudioVideo;Audio;Mixer;
+Keywords=volume;audio;sink;source;mixer;pulseaudio;pipewire;

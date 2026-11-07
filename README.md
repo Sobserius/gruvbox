@@ -56,15 +56,14 @@ cp -r .emacs .emacs.d ~/
 
 Or symlink individual directories if you prefer managing them from here.
 
-## Wallpaper / lock image (placeholder)
+## Wallpaper
 
-Configs point to:
+`lowpoly.png` is included and installed to `~/lowpoly.png` by `install.sh`. To use a different wallpaper, change `var=wallpaper,...` in `.config/mango/config.conf`, the `swaybg` line in `.config/mango/rice-startup.sh`, and `image=` in `.config/swaylock/config`.
 
-```text
-~/Pictures/gruvboxwallpaper.webp
-```
+## Audio / file manager (Gruvbox-themed)
 
-Put your Gruvbox wallpaper image there (same filename), or change `var=wallpaper,...` in `.config/mango/config.conf` and the `image=` line in `.config/swaylock/config` / the `swaybg` line in `.config/mango/rice-startup.sh`. If the image is missing, the startup script falls back to a solid Gruvbox background (`#000200`).
+- **`pulsemixer`**: config in `.config/pulsemixer.cfg` and a wrapper (installed to `/usr/local/bin/pulsemixer` + a desktop entry) that launches with Gruvbox-friendly colors (no pink/magenta). Use `--no-kitty` to run inline.
+- **`spf` (superfile)**: `.config/superfile/config.toml` sets `theme = "gruvbox"`.
 
 ## Keybind highlights (SUPER as main mod)
 

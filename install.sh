@@ -57,7 +57,7 @@ swaybg swayidle brightnessctl
 grim slurp wl-clipboard wf-recorder python
 pipewire pipewire-pulse wireplumber
 xdg-utils ttf-jetbrains-mono-nerd dolphin
-cava"
+cava pulsemixer superfile"
 
 # AUR dependencies (installed via yay/paru if available)
 # Note: mangobar-git is optional (native Mango bar); rice defaults to Waybar.
@@ -96,8 +96,18 @@ if [ -d "$repo/.local" ]; then
 	cp -a "$repo/.local/." "$HOME/.local/"
 fi
 
-warn "wallpaper: configs expect ~/lowpoly.png (or set var=wallpaper in ~/.config/mango/config.conf)."
-warn "if Mangobar/Waybar keyboard layout shows blank, ensure you run inside a MangoWC session (mmsg needs MANGO_INSTANCE_SIGNATURE)."
+if [ -f "$repo/lowpoly.png" ]; then
+	cp -a "$repo/lowpoly.png" "$HOME/lowpoly.png"
+fi
+
+# Gruvbox-friendly pulsemixer launcher (no pink/magenta) — shadows /usr/bin by default
+if [ -f "$repo/.local/bin/pulsemixer" ]; then
+	say "installing pulsemixer Gruvbox wrapper to /usr/local/bin"
+	sudo install -Dm755 "$repo/.local/bin/pulsemixer" /usr/local/bin/pulsemixer
+fi
+
+warn "wallpaper: installed ~/lowpoly.png (or set var=wallpaper in ~/.config/mango/config.conf)."
+warn "superfile (spf) uses the Gruvbox theme; pulsemixer launches with Gruvbox colors (no pink)."
 
 if command -v systemctl >/dev/null 2>&1; then
 	say "enabling pipewire user services"

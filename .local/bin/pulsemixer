@@ -1,0 +1,8 @@
+#!/bin/sh
+# Launch pulsemixer with Gruvbox-friendly colors (no pink/magenta).
+# Overrides ANSI magenta (color5/13) in a dedicated kitty window for full-color UI.
+if [ "$1" = "--no-kitty" ]; then
+    shift
+    exec /usr/bin/pulsemixer "$@"
+fi
+exec kitty -o color5=#508780 -o color13=#508780 -o color6=#85a699 -o color14=#85a699 --class pulsemixer -e /usr/bin/pulsemixer --color 2 "$@"
