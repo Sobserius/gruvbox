@@ -61,7 +61,7 @@ window#waybar {
     letter-spacing: 1px;
     padding: 0 7px;
 }
-#bat, #audio, #connection, #ram, #keyboard, #time {
+#audio, #connection, #ram, #keyboard, #time {
     background: @bg;
     border: 2px solid;
     border-radius: 5px;
@@ -220,7 +220,7 @@ tooltip label { color: @fg; padding: 6px; }
 }
 
 /* Rounder containers */
-#bat, #audio, #connection, #ram, #keyboard, #time {
+#audio, #connection, #ram, #keyboard, #time {
     border-radius: 9px;
 }
 
@@ -266,7 +266,7 @@ tooltip label { color: @fg; padding: 6px; }
 #custom-clock-icon { background-image: url("icons/clock.svg"); }
 
 /* One rounded frame per status module */
-#bat, #audio, #connection, #ram, #keyboard, #time {
+#audio, #connection, #ram, #keyboard, #time {
     border: none;
     padding: 2px;
     border-radius: 9px;
@@ -380,35 +380,11 @@ tooltip label { color: @fg; padding: 6px; }
     color: #000200;
 }
 
-/* Battery (laptops only, hidden when no battery) — split frame like audio: red icon + black value */
-#bat {
-    border: none;
-    padding: 2px;
-    border-radius: 9px;
-    background-color: @red;
-}
-#custom-battery-icon {
-    background-color: transparent;
-    background-image: url("icons/battery.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 14px 14px;
-    border: none;
-    border-radius: 0;
-    min-width: 32px;
-    padding: 0;
-    margin: 0;
-    font-size: 1px;
-    color: @bg;
-}
+/* Battery (laptops only) — hidden when no battery via exec-if; Pango split (red icon + dark value) */
 #custom-battery {
-    background-color: @bg;
+    background: transparent;
     border: none;
-    border-radius: 0 7px 7px 0;
-    margin: 0;
-    padding: 0 8px;
-    color: @fg;
+    border-radius: 9px;
+    margin: 0px 1px;
+    padding: 0;
 }
-#custom-battery.charging, #custom-battery.plugged, #custom-battery.full { color: @fg; }
-#custom-battery.warning { color: @orange; }
-#custom-battery.critical { color: @red; }
