@@ -24,16 +24,4 @@ case "$status" in
     "Not charging") class="$class plugged" ;;
 esac
 
-icon="󰁹"
-[ "$cap" -le 10 ] && icon="󰁺"
-[ "$cap" -le 20 ] && [ "$cap" -gt 10 ] && icon="󰁻"
-[ "$cap" -le 30 ] && [ "$cap" -gt 20 ] && icon="󰁼"
-[ "$cap" -le 40 ] && [ "$cap" -gt 30 ] && icon="󰁽"
-[ "$cap" -le 50 ] && [ "$cap" -gt 40 ] && icon="󰁾"
-[ "$cap" -le 60 ] && [ "$cap" -gt 50 ] && icon="󰁿"
-[ "$cap" -le 70 ] && [ "$cap" -gt 60 ] && icon="󰂀"
-[ "$cap" -le 80 ] && [ "$cap" -gt 70 ] && icon="󰂁"
-[ "$cap" -le 90 ] && [ "$cap" -gt 80 ] && icon="󰂂"
-case "$status" in Charging) icon="󰂄" ;; esac
-
-printf '{"text":"%s %s%%","tooltip":"%s: %s%%","class":"%s"}\n' "$icon" "$cap" "$status" "$cap" "$class"
+printf '{"text":"%s%%","tooltip":"%s: %s%%","class":"%s"}\n' "$cap" "$status" "$cap" "$class"
