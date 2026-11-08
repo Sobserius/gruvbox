@@ -380,14 +380,41 @@ tooltip label { color: @fg; padding: 6px; }
     color: #000200;
 }
 
-/* Battery (laptops only) — hidden on desktops via exec-if.
-   Styled as a red group frame with a dark right-side value cell (volume-like). */
-#custom-battery {
+/* Battery (laptops only; install.sh adds group/bat when hardware exists).
+   Structural clone of the volume group: colored icon cell + dark value cell. */
+#bat {
     background-color: @red;
-    color: @bg;
     border: none;
-    border-radius: 9px;
-    margin: 0px 1px;
     padding: 2px;
-    font-size: 12px;
+    border-radius: 9px;
 }
+
+#custom-battery-icon {
+    color: @bg;
+    min-width: 32px;
+    padding: 0;
+    margin: 0;
+    font-size: 1px;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    background-image: url("icons/battery.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 14px 14px;
+}
+
+#custom-battery {
+    background-color: @bg;
+    border: none;
+    border-radius: 0 7px 7px 0;
+    margin: 0;
+    padding: 0 8px;
+    color: @fg;
+}
+
+#custom-battery.charging,
+#custom-battery.plugged,
+#custom-battery.full { color: @fg; }
+#custom-battery.warning { color: @orange; }
+#custom-battery.critical { color: @red; }

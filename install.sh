@@ -100,6 +100,12 @@ if [ -f "$repo/lowpoly.png" ]; then
 	cp -a "$repo/lowpoly.png" "$HOME/lowpoly.png"
 fi
 
+# Battery is hardware-dependent: add the Waybar module only when a battery exists.
+if [ -f "$HOME/.config/waybar/scripts/setup-battery.py" ]; then
+	say "checking for a battery (Waybar module)"
+	python3 "$HOME/.config/waybar/scripts/setup-battery.py" || warn "could not configure the Waybar battery module"
+fi
+
 # Gruvbox-friendly pulsemixer launcher (no pink/magenta) — shadows /usr/bin by default
 if [ -f "$repo/.local/bin/pulsemixer" ]; then
 	say "installing pulsemixer Gruvbox wrapper to /usr/local/bin"

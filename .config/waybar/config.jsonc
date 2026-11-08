@@ -15,7 +15,6 @@
     "custom/cava"
   ],
   "modules-right": [
-    "custom/battery",
     "group/audio",
     "group/connection",
     "group/ram",
@@ -217,15 +216,5 @@
     "interval": 5,
     "tooltip": true,
     "format": "{text}"
-  },
-  "custom/battery": {
-    "exec": "sh \"$HOME/.config/waybar/scripts/battery.sh\"",
-    "exec-if": "sh -c 'for d in /sys/class/power_supply/BAT* /sys/class/power_supply/CMB*; do [ \"$(cat \"$d/type\" 2>/dev/null)\" = Battery ] && exit 0; done; exit 1'",
-    "return-type": "json",
-    "interval": 10,
-    "hide-empty-text": true,
-    "format": "{}",
-    "escape": false,
-    "tooltip": true
   }
 }
