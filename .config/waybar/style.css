@@ -380,11 +380,14 @@ tooltip label { color: @fg; padding: 6px; }
     color: #000200;
 }
 
-/* Battery (laptops only) — hidden when no battery via exec-if; Pango split (red icon + dark value) */
+/* Battery (laptops only) — hidden on desktops via exec-if.
+   Styled as a red group frame with a dark right-side value cell (volume-like). */
 #custom-battery {
-    background: transparent;
+    background-color: @red;
+    color: @bg;
     border: none;
     border-radius: 9px;
     margin: 0px 1px;
-    padding: 0;
+    padding: 2px;
+    font-size: 12px;
 }

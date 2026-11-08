@@ -1,6 +1,5 @@
 #!/bin/sh
-# Outputs battery info (Pango markup, volume-style split) only when a real battery is present.
-# No output => module hidden (desktops).
+# Outputs battery info (Pango) only when a real battery is present. No output => hidden.
 bat=""
 for d in /sys/class/power_supply/BAT* /sys/class/power_supply/CMB*; do
     [ -e "$d/type" ] || continue
@@ -8,25 +7,21 @@ for d in /sys/class/power_supply/BAT* /sys/class/power_supply/CMB*; do
     bat="$d"; break
 done
 [ -n "$bat" ] || exit 0
-
 cap=$(cat "$bat/capacity" 2>/dev/null)
 status=$(cat "$bat/status" 2>/dev/null)
 [ -n "$cap" ] || exit 0
 
-class="normal"
-[ "$cap" -le 30 ] && class="warning"
-[ "$cap" -le 15 ] && class="critical"
+rfg="#e9d9b6"; class="normal"
+[ "$cap" -le 30 ] && rfg="#edbb26" && class="warning"
+[ "$cap" -le 15 ] && rfg="#8c3936" && class="critical"
+icon="󰁹"
 case "$status" in
-    Charging) class="$class charging" ; icon="󰂄" ;;
-    *) icon="󰁹" ;;
+    Charging) icon="󰂄"; class="$class charging" ;;
+    Full) class="$class full" ;;
+    "Not charging") class="$class plugged" ;;
 esac
 
-# Gruvbox split: red icon cell + dark value cell (matches volume module feel)
-lbg="#8c3936"; lfg="#000200"; rbg="#000200"; rfg="#e9d9b6"
-[ "$cap" -le 15 ] && rfg="#8c3936"
-[ "$cap" -le 30 ] && [ "$cap" -gt 15 ] && rfg="#edbb26"
-
-text="<span background=\"${lbg}\" foreground=\"${lfg}\"> ${icon} </span><span background=\"${rbg}\" foreground=\"${rfg}\"> ${cap}% </span>"
-# JSON encode minimal
+# left = icon on red frame, right = percentage on dark cell (volume-like split)
+text="<span foreground=\"#000200\"> ${icon} </span><span background=\"#000200\" foreground=\"${rfg}\"> ${cap}% </span>"
 text=$(printf '%s' "$text" | sed 's/\\/\\\\/g; s/"/\\"/g')
 printf '{"text":"%s","tooltip":"%s: %s%%","class":"%s"}\n' "$text" "$status" "$cap" "$class"
