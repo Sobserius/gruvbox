@@ -9,7 +9,7 @@
     (box :class "radio-body" :orientation "v" :space-evenly false :spacing 12
       (box :class "radio-header" :space-evenly false :spacing 12
         (label :class "radio-heading" :text "CONNECTIONS" :xalign 0 :hexpand true)
-        (button :class "radio-close" :onclick "python3 ~/.config/eww/scripts/connectivity.py close" "×"))
+        (button :class "panel-close" :tooltip "Close" :onclick "python3 ~/.config/eww/scripts/connectivity.py close" "×"))
       (box :class "radio-tabs" :space-evenly true :spacing 8
         (button :class {radio_tab == "wifi" ? "radio-tab selected" : "radio-tab"}
           :onclick "eww update radio_tab=wifi" "Wi-Fi")

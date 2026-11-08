@@ -5,7 +5,7 @@
     (box :class "power-body" :orientation "v" :space-evenly false :spacing 12
       (box :class "power-heading" :space-evenly false
         (label :text "SESSION" :hexpand true :xalign 0)
-        (button :class "power-close" :tooltip "Close" :onclick "eww close power" "×"))
+        (button :class "panel-close" :tooltip "Close" :onclick "eww close power" "×"))
       (box :orientation "v" :space-evenly false :spacing 8
         (box :space-evenly true :spacing 8
           (button :class {power_choice == "suspend" ? "power-tile sleep chosen" : "power-tile sleep"}
