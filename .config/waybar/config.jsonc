@@ -15,7 +15,7 @@
     "custom/cava"
   ],
   "modules-right": [
-    "group/bat",
+    "custom/battery",
     "group/audio",
     "group/connection",
     "group/ram",
@@ -218,28 +218,13 @@
     "tooltip": true,
     "format": "{text}"
   },
-  "custom/battery-icon": {
-    "format": " ",
-    "tooltip": false,
-    "align": 0.5
-  },
-  "battery": {
+  "custom/battery": {
+    "exec": "sh \"$HOME/.config/waybar/scripts/battery.sh\"",
+    "exec-if": "sh -c 'for d in /sys/class/power_supply/BAT* /sys/class/power_supply/CMB*; do [ \"$(cat \"$d/type\" 2>/dev/null)\" = Battery ] && exit 0; done; exit 1'",
+    "return-type": "json",
     "interval": 10,
-    "states": {
-      "warning": 30,
-      "critical": 15
-    },
-    "format": "{capacity}%",
-    "format-charging": "{capacity}%",
-    "format-plugged": "{capacity}%",
-    "format-full": "{capacity}%",
-    "tooltip-format": "{timeTo}\n{power:.1f} W"
-  },
-  "group/bat": {
-    "orientation": "horizontal",
-    "modules": [
-      "custom/battery-icon",
-      "battery"
-    ]
+    "hide-empty-text": true,
+    "format": "{}",
+    "tooltip": true
   }
 }

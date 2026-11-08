@@ -4,8 +4,11 @@ import json, os, shutil, subprocess, sys
 def run(cmd, **kw):
     return subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, **kw)
 
+def notify(msg):
+    if shutil.which("notify-send"):
+        subprocess.run(["notify-send", "Power menu", msg], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
 def get_screen():
-    # MangoWC / wlroots via mmsg
     if shutil.which("mmsg"):
         try:
             out = subprocess.check_output(["mmsg", "get", "all-monitors"], text=True, stderr=subprocess.DEVNULL, timeout=3)
@@ -16,7 +19,6 @@ def get_screen():
                 if name: return name
         except Exception:
             pass
-    # Hyprland fallback
     if shutil.which("hyprctl"):
         try:
             monitors = json.loads(subprocess.check_output(["hyprctl", "monitors", "-j"], text=True, timeout=3))
@@ -25,7 +27,6 @@ def get_screen():
                 return selected.get("name")
         except Exception:
             pass
-    # wlr-randr fallback (parse first connected output name)
     if shutil.which("wlr-randr"):
         try:
             out = subprocess.check_output(["wlr-randr"], text=True, stderr=subprocess.DEVNULL, timeout=3)
@@ -36,18 +37,37 @@ def get_screen():
             pass
     return None
 
-try:
-    run(["eww", "daemon"], timeout=5)
-    run(["eww", "update", "power_choice="], check=False)
+def eww_open():
+    eww = shutil.which("eww")
+    if not eww:
+        return False, "eww not installed (AUR: eww)"
+    cfg = os.path.expanduser("~/.config/eww")
+    run([eww, "-c", cfg, "daemon"], timeout=8)
+    run([eww, "-c", cfg, "update", "power_choice="])
     screen = get_screen()
-    cmd = ["eww", "open", "--toggle"]
+    attempts = []
     if screen:
-        cmd += ["--screen", screen]
-    cmd.append("power")
-    r = subprocess.run(cmd, capture_output=True, text=True)
-    if r.returncode != 0:
-        # fallback without --screen
-        subprocess.run(["eww", "open", "--toggle", "power"], check=True)
-except (subprocess.SubprocessError, FileNotFoundError) as e:
-    print(f"Power popup failed: {e}", file=sys.stderr)
-    raise SystemExit(1)
+        attempts.append([eww, "-c", cfg, "open", "--toggle", "--screen", screen, "power"])
+    attempts.append([eww, "-c", cfg, "open", "--toggle", "power"])
+    attempts.append([eww, "-c", cfg, "open", "power"])
+    last = ""
+    for cmd in attempts:
+        r = subprocess.run(cmd, capture_output=True, text=True)
+        if r.returncode == 0:
+            return True, ""
+        last = (r.stderr or r.stdout or "").strip()
+    return False, last or "eww open failed"
+
+def fallback_menu():
+    # simple fallback if eww can't show the popup
+    if shutil.which("wlogout"):
+        subprocess.Popen(["wlogout"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        return True
+    return False
+
+ok, err = eww_open()
+if not ok:
+    if not fallback_menu():
+        notify(f"failed: {err}")
+        print(f"Power popup failed: {err}", file=sys.stderr)
+        sys.exit(1)

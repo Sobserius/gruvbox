@@ -380,38 +380,15 @@ tooltip label { color: @fg; padding: 6px; }
     color: #000200;
 }
 
-/* Battery (Gruvbox red) — added for laptops */
-#bat { border-color: @red; color: @red; }
-#custom-battery-icon { background: @red; }
-#battery { color: @red; }
-#custom-battery-icon { background-image: url("icons/battery.svg"); }
-#bat { background-color: @red; }
-#battery.warning { color: @orange; }
-#battery.critical { color: @red; }
-
-/* Battery structural fit (Gruvbox grouped frame) */
-#bat { border: none; padding: 2px; border-radius: 9px; background-color: @red; }
-#custom-battery-icon {
-    background-color: transparent;
+/* Battery (laptops only) — hidden on desktops via exec-if; styled red */
+#custom-battery {
+    background-color: @red;
+    color: @bg;
     border: none;
-    border-radius: 0;
-    min-width: 32px;
-    padding: 0;
-    margin: 0;
-    font-size: 1px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 14px 14px;
-    background-image: url("icons/battery.svg");
-}
-#battery {
-    background-color: @bg;
-    border: none;
-    border-radius: 0 7px 7px 0;
-    margin: 0;
+    border-radius: 9px;
+    margin: 0px 1px;
     padding: 0 8px;
-    color: @fg;
 }
-#battery.charging, #battery.plugged, #battery.full { color: @fg; }
-#battery.warning { color: @orange; }
-#battery.critical { color: @red; }
+#custom-battery.warning { background-color: @orange; color: @bg; }
+#custom-battery.critical { background-color: @red; color: @fg; }
+#custom-battery.charging, #custom-battery.plugged, #custom-battery.full { color: @bg; }
