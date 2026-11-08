@@ -31,6 +31,11 @@ start_once waybar waybar \
 # Eww daemon (popups/widgets used by bar clicks)
 eww -c "$HOME/.config/eww" daemon >>"$logdir/eww.log" 2>&1 &
 
+# Removable drives: automount + notifications (udiskie/udisks2)
+if ! pgrep -u "$uid" -f "[u]diskie" >/dev/null 2>&1; then
+    udiskie --automount --notify --tray >>"$logdir/udiskie.log" 2>&1 &
+fi
+
 # Now-playing notifications (kept from original rice)
 if [ -f "$HOME/.config/dunst/now-playing.py" ]; then
     if ! pgrep -u "$uid" -f "now-playing.py" >/dev/null 2>&1; then

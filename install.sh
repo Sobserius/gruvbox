@@ -56,7 +56,7 @@ waybar rofi-wayland kitty mako libnotify playerctl
 swaybg swayidle brightnessctl
 grim slurp wl-clipboard wf-recorder python
 pipewire pipewire-pulse wireplumber
-xdg-utils ttf-jetbrains-mono-nerd
+xdg-utils ttf-jetbrains-mono-nerd udisks2 udiskie
 cava pulsemixer superfile"
 
 # AUR dependencies (installed via yay/paru if available)
