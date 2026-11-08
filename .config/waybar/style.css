@@ -61,7 +61,7 @@ window#waybar {
     letter-spacing: 1px;
     padding: 0 7px;
 }
-#audio, #connection, #ram, #keyboard, #time {
+#bat, #audio, #connection, #ram, #keyboard, #time {
     background: @bg;
     border: 2px solid;
     border-radius: 5px;
@@ -72,7 +72,7 @@ window#waybar {
 #keyboard { border-color: @blue; color: @blue; }
 #time { border-color: @yellow; color: @yellow; }
 #custom-audio-icon, #custom-network-icon, #custom-memory-icon,
-#custom-language-icon, #custom-clock-icon {
+#custom-language-icon, #custom-clock-icon, #custom-battery-icon {
     color: @bg;
     padding: 0 7px;
     border-radius: 2px 0 0 2px;
@@ -82,7 +82,7 @@ window#waybar {
 #custom-memory-icon { background: @pink; }
 #custom-language-icon { background: @blue; }
 #custom-clock-icon { background: @yellow; }
-#pulseaudio, #network, #memory, #custom-language, #clock { padding: 0 7px; }
+#pulseaudio, #network, #memory, #custom-language, #clock, #battery { padding: 0 7px; }
 #pulseaudio { color: @orange; }
 #network { color: @lightgreen; }
 #network.disconnected { color: @red; }
@@ -220,7 +220,7 @@ tooltip label { color: @fg; padding: 6px; }
 }
 
 /* Rounder containers */
-#audio, #connection, #ram, #keyboard, #time {
+#bat, #audio, #connection, #ram, #keyboard, #time {
     border-radius: 9px;
 }
 
@@ -266,7 +266,7 @@ tooltip label { color: @fg; padding: 6px; }
 #custom-clock-icon { background-image: url("icons/clock.svg"); }
 
 /* One rounded frame per status module */
-#audio, #connection, #ram, #keyboard, #time {
+#bat, #audio, #connection, #ram, #keyboard, #time {
     border: none;
     padding: 2px;
     border-radius: 9px;
@@ -379,3 +379,39 @@ tooltip label { color: @fg; padding: 6px; }
     box-shadow: none;
     color: #000200;
 }
+
+/* Battery (Gruvbox red) — added for laptops */
+#bat { border-color: @red; color: @red; }
+#custom-battery-icon { background: @red; }
+#battery { color: @red; }
+#custom-battery-icon { background-image: url("icons/battery.svg"); }
+#bat { background-color: @red; }
+#battery.warning { color: @orange; }
+#battery.critical { color: @red; }
+
+/* Battery structural fit (Gruvbox grouped frame) */
+#bat { border: none; padding: 2px; border-radius: 9px; background-color: @red; }
+#custom-battery-icon {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    min-width: 32px;
+    padding: 0;
+    margin: 0;
+    font-size: 1px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 14px 14px;
+    background-image: url("icons/battery.svg");
+}
+#battery {
+    background-color: @bg;
+    border: none;
+    border-radius: 0 7px 7px 0;
+    margin: 0;
+    padding: 0 8px;
+    color: @fg;
+}
+#battery.charging, #battery.plugged, #battery.full { color: @fg; }
+#battery.warning { color: @orange; }
+#battery.critical { color: @red; }

@@ -15,6 +15,7 @@
     "custom/cava"
   ],
   "modules-right": [
+    "group/bat",
     "group/audio",
     "group/connection",
     "group/ram",
@@ -211,10 +212,34 @@
     }
   },
   "custom/language": {
-    "exec": "python3 /home/sob/.config/waybar/scripts/keyboard-layout.py",
+    "exec": "python3 \"$HOME/.config/waybar/scripts/keyboard-layout.py\"",
     "return-type": "json",
     "interval": 5,
     "tooltip": true,
     "format": "{text}"
+  },
+  "custom/battery-icon": {
+    "format": " ",
+    "tooltip": false,
+    "align": 0.5
+  },
+  "battery": {
+    "interval": 10,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}%",
+    "format-charging": "{capacity}%",
+    "format-plugged": "{capacity}%",
+    "format-full": "{capacity}%",
+    "tooltip-format": "{timeTo}\n{power:.1f} W"
+  },
+  "group/bat": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/battery-icon",
+      "battery"
+    ]
   }
 }
