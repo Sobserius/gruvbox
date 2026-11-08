@@ -68,17 +68,29 @@ def state():
 def close():
     eww('close','volume-panel'); eww('update','volume_open=false')
 
+def screen():
+    # Hyprland: use the focused output's model. Elsewhere (MangoWC etc.),
+    # eww's numeric monitor index 0 works and avoids GTK's primary-monitor error.
+    try:
+        r=run(['hyprctl','-j','monitors'])
+        monitors=json.loads(r.stdout)
+        if r.returncode == 0 and monitors:
+            focused=next((m for m in monitors if m.get('focused')),monitors[0])
+            return focused.get('model') or '0'
+    except (OSError,ValueError,KeyError,IndexError,subprocess.SubprocessError):
+        pass
+    return '0'
+
 def toggle():
     eww('daemon')
     active=eww('active-windows').stdout
     if any(line.split(':',1)[0].strip()=='volume-panel' for line in active.splitlines()):
         close(); return
-    monitors=json.loads(checked(['hyprctl','-j','monitors']))
-    focused=next((m for m in monitors if m.get('focused')),monitors[0] if monitors else {})
+    monitor=screen()
     eww('update','volume_open=true')
-    args=['open']
-    if focused.get('model'): args+=['--screen',focused['model']]
-    p=eww(*args,'volume-panel')
+    p=eww('open','--screen',monitor,'volume-panel')
+    if p.returncode and monitor!='0':
+        p=eww('open','--screen','0','volume-panel')
     if p.returncode:
         eww('update','volume_open=false')
         raise ValueError(p.stderr.strip() or 'Eww could not open the volume panel.')
