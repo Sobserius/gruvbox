@@ -72,7 +72,7 @@ window#waybar {
 #keyboard { border-color: @blue; color: @blue; }
 #time { border-color: @yellow; color: @yellow; }
 #custom-audio-icon, #custom-network-icon, #custom-memory-icon,
-#custom-language-icon, #custom-clock-icon, #custom-battery-icon {
+#custom-language-icon, #custom-clock-icon {
     color: @bg;
     padding: 0 7px;
     border-radius: 2px 0 0 2px;
@@ -82,7 +82,7 @@ window#waybar {
 #custom-memory-icon { background: @pink; }
 #custom-language-icon { background: @blue; }
 #custom-clock-icon { background: @yellow; }
-#pulseaudio, #network, #memory, #custom-language, #clock, #battery { padding: 0 7px; }
+#pulseaudio, #network, #memory, #custom-language, #clock { padding: 0 7px; }
 #pulseaudio { color: @orange; }
 #network { color: @lightgreen; }
 #network.disconnected { color: @red; }
@@ -380,15 +380,35 @@ tooltip label { color: @fg; padding: 6px; }
     color: #000200;
 }
 
-/* Battery (laptops only) — hidden on desktops via exec-if; styled red */
-#custom-battery {
-    background-color: @red;
-    color: @bg;
+/* Battery (laptops only, hidden when no battery) — split frame like audio: red icon + black value */
+#bat {
     border: none;
+    padding: 2px;
     border-radius: 9px;
-    margin: 0px 1px;
-    padding: 0 8px;
+    background-color: @red;
 }
-#custom-battery.warning { background-color: @orange; color: @bg; }
-#custom-battery.critical { background-color: @red; color: @fg; }
-#custom-battery.charging, #custom-battery.plugged, #custom-battery.full { color: @bg; }
+#custom-battery-icon {
+    background-color: transparent;
+    background-image: url("icons/battery.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 14px 14px;
+    border: none;
+    border-radius: 0;
+    min-width: 32px;
+    padding: 0;
+    margin: 0;
+    font-size: 1px;
+    color: @bg;
+}
+#custom-battery {
+    background-color: @bg;
+    border: none;
+    border-radius: 0 7px 7px 0;
+    margin: 0;
+    padding: 0 8px;
+    color: @fg;
+}
+#custom-battery.charging, #custom-battery.plugged, #custom-battery.full { color: @fg; }
+#custom-battery.warning { color: @orange; }
+#custom-battery.critical { color: @red; }
