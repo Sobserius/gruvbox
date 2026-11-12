@@ -63,7 +63,7 @@ Or symlink individual directories if you prefer managing them from here.
 ## Audio / file manager (Gruvbox-themed)
 
 - **`pulsemixer`**: config in `.config/pulsemixer.cfg` and a wrapper (installed to `/usr/local/bin/pulsemixer` + a desktop entry) that launches with Gruvbox-friendly colors (no pink/magenta). Use `--no-kitty` to run inline.
-- **`spf` (superfile)**: `.config/superfile/config.toml` sets `theme = "gruvbox"`.
+- **`spf` (superfile)**: `.config/superfile/config.toml` sets `theme = "gruvbox"`. Launches via `SUPER+E` (or the **Superfile** desktop entry in rofi) using `.local/bin/superfile`.
 
 ## Keybind highlights (SUPER as main mod)
 

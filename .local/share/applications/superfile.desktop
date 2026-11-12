@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Superfile
+GenericName=File Manager
+Comment=Terminal file manager (spf)
+Exec=kitty --class Superfile --title Superfile -e /usr/bin/spf %U
+Icon=system-file-manager
+Terminal=false
+StartupWMClass=Superfile
+Categories=System;FileManager;FileTools;
+Keywords=files;tui;manager;
